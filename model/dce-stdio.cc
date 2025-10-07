@@ -498,25 +498,11 @@ int dce_getchar (void)
   return fgetc (*Current ()->process->pstdin);
 }
 
-int dce__IO_getc (FILE *stream)
-{
-  NS_LOG_FUNCTION (Current () << UtilsGetNodeId ());
-  NS_ASSERT (Current () != 0);
-  return fgetc (stream);
-}
-
 int dce_putchar (int __c)
 {
   NS_LOG_FUNCTION (Current () << UtilsGetNodeId () << (char)__c);
   NS_ASSERT (Current () != 0);
   return fputc (__c, *Current ()->process->pstdout);
-}
-
-int dce__IO_putc (int __c, FILE *__stream)
-{
-  NS_LOG_FUNCTION (Current () << UtilsGetNodeId () << (char)__c);
-  NS_ASSERT (Current () != 0);
-  return fputc (__c, __stream);
 }
 
 int dce_puts (const char *__s)
