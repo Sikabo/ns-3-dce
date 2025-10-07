@@ -14,14 +14,14 @@ Usage:
         conf.load('clang_compilation_database')
 """
 
-import sys, os, json, shlex, pipes
+import sys, os, json, shlex
 from waflib import Logs, TaskGen
 from waflib.Tools import c, cxx
 
 if sys.hexversion >= 0x3030000:
 	quote = shlex.quote
 else:
-	quote = pipes.quote
+	raise Exception("pipes no longer supported")
 
 @TaskGen.feature('*')
 @TaskGen.after_method('process_use')
