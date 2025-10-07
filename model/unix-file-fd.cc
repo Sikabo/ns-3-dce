@@ -206,7 +206,7 @@ UnixFileFdBase::Fxstat (int ver, struct ::stat *buf)
   Thread *current = Current ();
   NS_LOG_FUNCTION (this << current << buf);
   NS_ASSERT (current != 0);
-  int retval = ::__fxstat (ver, m_realFd, buf);
+  int retval = ::fstat (m_realFd, buf);
   if (retval == -1)
     {
       current->err = errno;
@@ -219,7 +219,7 @@ UnixFileFdBase::Fxstat64 (int ver, struct ::stat64 *buf)
   Thread *current = Current ();
   NS_LOG_FUNCTION (this << current << buf);
   NS_ASSERT (current != 0);
-  int retval = ::__fxstat64 (ver, m_realFd, buf);
+  int retval = ::fstat64 (m_realFd, buf);
   if (retval == -1)
     {
       current->err = errno;
@@ -488,7 +488,7 @@ UnixRandomFd::Fxstat (int ver, struct ::stat *buf)
     }
 
   NS_ASSERT (current != 0);
-  int retval = ::__fxstat (ver, tmpFd, buf);
+  int retval = ::fstat (tmpFd, buf);
   if (retval == -1)
     {
       current->err = errno;
@@ -510,7 +510,7 @@ UnixRandomFd::Fxstat64 (int ver, struct ::stat64 *buf)
     }
 
   NS_ASSERT (current != 0);
-  int retval = ::__fxstat64 (ver, tmpFd, buf);
+  int retval = ::fstat64 (tmpFd, buf);
   if (retval == -1)
     {
       current->err = errno;

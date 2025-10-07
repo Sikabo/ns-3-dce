@@ -5,15 +5,17 @@
 extern "C" {
 #endif
 
-int dce___xstat (int ver, const char *path, struct stat *buf);
-int dce___fxstat (int ver, int fd, struct stat *buf);
-int dce___lxstat (int ver, const char *pathname, struct stat *buf);
+int dce_stat (const char *path, struct stat *buf);
+int dce_fstat (int fd, struct stat *buf);
+int dce_lstat (const char *pathname, struct stat *buf);
 
-int dce___xstat64 (int ver, const char *path, struct stat64 *buf);
-int dce___fxstat64 (int ver, int fd, struct stat64 *buf);
-int dce___lxstat64 (int ver, const char *pathname, struct stat64 *buf);
-int dce___fxstatat (int ver, int fd, const char *filename,
+int dce_stat64 (const char *path, struct stat64 *buf);
+int dce_fstat64 (int fd, struct stat64 *buf);
+int dce_lstat64 (const char *pathname, struct stat64 *buf);
+int dce_fstatat (int fd, const char *filename,
                     struct stat *buf, int flag);
+int dce_fstatat64(int dirfd, const char * path,
+                    struct stat64 * stat_buf, int flags);
 int dce_fstat (int fd, struct stat *buf);
 int dce_fstat64 (int fd, struct stat64 *buf);
 
