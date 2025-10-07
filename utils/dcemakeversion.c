@@ -203,11 +203,19 @@ int
 main (int argc, char *argv[])
 {
   int i = 0;
+  void *dl_handle;
   createversion (seek4Lib ("libc.so"), argv[++i], "model/libc.version");
+  dl_handle = dlopen("libpthread.so.0", RTLD_NOW);
   createversion (seek4Lib ("libpthread.so"), argv[++i], "model/libpthread.version");
+  dlclose(dl_handle);
+  dl_handle = dlopen("librt.so.1", RTLD_NOW);
   createversion (seek4Lib ("librt.so"), argv[++i], "model/librt.version");
+  dlclose(dl_handle);
+  // libm doesn't need dl-magic, it gets linked in via --no-as-needed
   createversion (seek4Lib ("libm.so"), argv[++i], "model/libm.version");
+  dl_handle = dlopen("libdl.so.2", RTLD_NOW);
   createversion (seek4Lib ("libdl.so"), argv[++i], "model/libdl.version");
+  dlclose(dl_handle);
 
   return 0;
 }
