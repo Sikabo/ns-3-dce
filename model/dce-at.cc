@@ -32,7 +32,7 @@ NS_LOG_COMPONENT_DEFINE ("DceAt");
 
 using namespace ns3;
 
-int dce___fxstatat (int ver, int fd, const char *pathname, struct stat *buf, int flag)
+int dce_fstatat (int fd, const char *pathname, struct stat *buf, int flag)
 {
   Thread *current = Current ();
   NS_LOG_FUNCTION (current << UtilsGetNodeId () << pathname << buf);
@@ -58,12 +58,12 @@ int dce___fxstatat (int ver, int fd, const char *pathname, struct stat *buf, int
           current->err = EBADF;
           return -1;
         }
-      retval = ::__fxstatat (ver, realFd, pathname, buf, flag);
+      retval = ::fstatat (realFd, pathname, buf, flag);
     }
   else
     {
       std::string path = UtilsGetCurrentDirName () + "/" +  UtilsGetRealFilePath (pathname);
-      retval = ::__fxstatat (ver, fd, path.c_str (), buf, flag);
+      retval = ::fstatat (fd, path.c_str (), buf, flag);
     }
   if (retval == -1)
     {
@@ -72,6 +72,48 @@ int dce___fxstatat (int ver, int fd, const char *pathname, struct stat *buf, int
     }
   return retval;
 }
+
+int dce_fstatat64(int dirfd, const char * path, struct stat64 * stat_buf, int flags)
+{
+  Thread *current = Current ();
+  NS_LOG_FUNCTION (current << UtilsGetNodeId () << path << stat_buf);
+  NS_ASSERT (current != 0);
+  int retval = -1;
+
+  if ((0 == path) || (0 == stat_buf))
+    {
+      current->err = EFAULT;
+      return -1;
+    }
+  if (std::string (path) == "")
+    {
+      current->err = ENOENT;
+      return -1;
+    }
+  if (dirfd != AT_FDCWD && path[0] != '/')
+    {
+      int realFd = getRealFd (dirfd, current);
+
+      if (realFd < 0)
+        {
+          current->err = EBADF;
+          return -1;
+        }
+      retval = ::fstatat64 (realFd, path, stat_buf, flags);
+    }
+  else
+    {
+      std::string path = UtilsGetCurrentDirName () + "/" +  UtilsGetRealFilePath (path);
+      retval = ::fstatat64 (dirfd, path.c_str (), stat_buf, flags);
+    }
+  if (retval == -1)
+    {
+      current->err = errno;
+      return -1;
+    }
+  return retval;
+}
+
 void unlink_notify (std::string fullpath);
 int dce_unlinkat (int fd, const char *pathname, int flags)
 {

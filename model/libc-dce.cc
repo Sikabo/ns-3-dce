@@ -206,7 +206,9 @@ void libc_dce (struct Libc **libc)
   (*libc)->strstr_fn = dce_strstr;
   (*libc)->vsnprintf_fn = dce_vsnprintf;
 
-  extern struct dl_open_hook *_dl_open_hook;
+  // TODO:
+  //extern struct dl_open_hook *_dl_open_hook;
+  struct dl_open_hook *_dl_open_hook;
   _dl_open_hook = (struct dl_open_hook *)&dce_dl_open_hook;
 }
 } // extern "C"
