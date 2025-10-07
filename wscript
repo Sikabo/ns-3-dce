@@ -898,7 +898,7 @@ def build(bld):
     # Write the build status file.
     build_status_file = os.path.join(bld.out_dir, 'build-status.py')
     out = open(build_status_file, 'w')
-    out.write('#! /usr/bin/env python\n')
+    out.write('#! /usr/bin/env python3\n')
     out.write('\n')
     out.write('# Programs that are runnable.\n')
     out.write('ns3_runnable_programs = ' + str(bld.env['NS3_RUNNABLE_PROGRAMS']) + '\n')
