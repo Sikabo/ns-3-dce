@@ -239,6 +239,9 @@ ElfCache::EditBuffer (uint8_t *map, uint32_t selfId) const
   cur = dyn;
   while (cur->d_tag != DT_NULL)
     {
+      if (cur->d_tag == DT_FLAGS_1) {
+          cur->d_un.d_val = cur->d_un.d_val & ~DF_1_PIE;
+      }
       if (cur->d_tag == DT_FINI)
         {
           cur->d_tag = DT_INIT;
