@@ -142,12 +142,12 @@ def _check_win32(conf):
             if _check_compilation_flag(conf, '-Wl,--soname=foo'):
                 env['WL_SONAME_SUPPORTED'] = True
 
-def build_ns3_libname(version, module, profile):
-    return "lib{}-{}-{}".format(version, module, profile)
+def build_ns3_libname(version, module):
+    return "{}-{}".format(version, module)
 
 def _check_dependencies(conf, required, mandatory):
     found = []
-    libcore = build_ns3_libname("*", "core", conf.env['LIB_SUFFIX'])
+    libcore = build_ns3_libname("ns*", "core")
     ns3_dir_pkgconfig = conf.env['NS3_DIR'] + '/lib/pkgconfig'
 
     if not 'NS3_VERSION' in conf.env:
@@ -158,12 +158,12 @@ def _check_dependencies(conf, required, mandatory):
             return
         elif len(pcfiles) == 1:
             match_pkg = os.path.basename(pcfiles[0])
-            lib = re.search("(ns[0-9][\.\-][dev0-9\.]+)", match_pkg)
-            if lib.group(0) is None:
-                Logs.error("Could not find version for the match %s" % match_pkg)
+            # extract text before "-core"
+            match_pkg_ends = match_pkg.find("-core")
+            if match_pkg_ends == -1:
+                Logs.error("Could not find " + libcore)
                 return
-
-            version = lib.group(0)
+            version = match_pkg[0:match_pkg_ends]
             conf.env['NS3_VERSION'] = version
         else:
             Logs.error("Could not find " + libcore)
@@ -172,7 +172,7 @@ def _check_dependencies(conf, required, mandatory):
     for module in required:
         if module in conf.env['NS3_MODULES_FOUND']:
             continue
-        libname = build_ns3_libname(conf.env['NS3_VERSION'], module.lower(), conf.env['LIB_SUFFIX'])
+        libname = build_ns3_libname(conf.env['NS3_VERSION'], module.lower())
         retval = conf.check_cfg(package=libname,
             args='--cflags --libs' + (' --static' if conf.env['NS3_ENABLE_STATIC'] else ''),
             mandatory=mandatory,
