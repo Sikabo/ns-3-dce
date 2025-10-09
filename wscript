@@ -143,8 +143,8 @@ def configure(conf):
         conf.env.append_value('CXXDEFINES', 'HAVE_VALGRIND_H')
 
 
-    # Enable C++-17 support
-    conf.env.append_value('CXXFLAGS', '-std=c++17')
+    # Enable C++-20 support
+    conf.env.append_value('CXXFLAGS', '-std=c++20')
 
     if Options.options.kernel_stack:
         if not os.path.isdir(Options.options.kernel_stack):
