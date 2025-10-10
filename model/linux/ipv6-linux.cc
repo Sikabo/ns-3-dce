@@ -454,6 +454,18 @@ Ipv6Linux::GetWeakEsModel (void) const
 }
 
 void
+Ipv6Linux::SetStrongEndSystemModel(bool model)
+{
+  m_strongEsModel = model;
+}
+
+bool
+Ipv6Linux::GetStrongEndSystemModel() const
+{
+  return m_strongEsModel;
+}
+
+void
 Ipv6Linux::InstallNode (Ptr<Node> node)
 {
   ObjectFactory factory;

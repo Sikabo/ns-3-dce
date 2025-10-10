@@ -355,6 +355,8 @@ private:
   virtual bool GetIpForward (void) const;
   virtual void SetWeakEsModel (bool model);
   virtual bool GetWeakEsModel (void) const;
+  virtual void SetStrongEndSystemModel(bool model);
+  virtual bool GetStrongEndSystemModel() const;
   uint32_t AddIpv4Interface (Ptr<Ipv4Interface> interface);
   Ptr<Ipv4Interface> GetInterface (uint32_t i) const;
 
@@ -362,6 +364,7 @@ private:
   Ptr<Ipv4RoutingProtocol> m_routingProtocol;
   bool m_ipForward;
   bool m_weakEsModel;
+  bool m_strongEsModel;
   Ipv4InterfaceList m_interfaces;
   uint64_t m_nanoSec;
 };
