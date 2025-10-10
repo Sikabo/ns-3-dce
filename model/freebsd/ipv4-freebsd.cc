@@ -543,6 +543,18 @@ Ipv4FreeBSD::GetWeakEsModel (void) const
 }
 
 void
+Ipv4FreeBSD::SetStrongEndSystemModel(bool model)
+{
+  m_strongEsModel = model;
+}
+
+bool
+Ipv4FreeBSD::GetStrongEndSystemModel() const
+{
+  return m_strongEsModel;
+}
+
+void
 Ipv4FreeBSD::InstallNode (Ptr<Node> node)
 {
   ObjectFactory factory;

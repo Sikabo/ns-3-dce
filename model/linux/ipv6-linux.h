@@ -327,6 +327,8 @@ private:
 
   virtual void SetWeakEsModel (bool model);
   virtual bool GetWeakEsModel (void) const;
+  virtual void SetStrongEndSystemModel(bool model);
+  virtual bool GetStrongEndSystemModel() const;
   uint32_t AddIpv6Interface (Ptr<Ipv6Interface> interface);
   Ptr<Ipv6Interface> GetInterface (uint32_t i) const;
 
@@ -336,6 +338,7 @@ private:
   bool m_mtuDiscover;
   Ptr<Ipv6PmtuCache> m_pmtuCache;
   bool m_weakEsModel;
+  bool m_strongEsModel;
   Ipv6InterfaceList m_interfaces;
   uint64_t m_nanoSec;
 };
