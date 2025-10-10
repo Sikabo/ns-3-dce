@@ -353,7 +353,7 @@ private:
 
 
 DceMptcpTestSuite::DceMptcpTestSuite ()
-  : TestSuite ("dce-mptcp", UNIT)
+  : TestSuite ("dce-mptcp", Type::UNIT)
 {
   typedef struct {
     const char *name;
@@ -382,7 +382,7 @@ DceMptcpTestSuite::DceMptcpTestSuite ()
                                          tests[i].sockf,
                                          tests[i].isSkip
                                          ),
-                   TestCase::QUICK);
+                   Duration::QUICK);
     }
 }
 

@@ -166,7 +166,7 @@ private:
 #define FREEBSD_STACK  (1 << 2)
 
 DceManagerTestSuite::DceManagerTestSuite ()
-  : TestSuite ("dce-process-manager", UNIT)
+  : TestSuite ("dce-process-manager", Type::UNIT)
 {
   typedef struct
   {
@@ -257,7 +257,7 @@ DceManagerTestSuite::DceManagerTestSuite ()
                                            (tests[i].stackMask & NS3_STACK) ?
                                            (isUctxFiber ? tests[i].skipUctx : false) : true
                                            ),
-                   TestCase::QUICK);
+                   Duration::QUICK);
     }
 
   // linux stack
@@ -275,7 +275,7 @@ DceManagerTestSuite::DceManagerTestSuite ()
                                                (tests[i].stackMask & LINUX_STACK) ?
                                                (isUctxFiber ? tests[i].skipUctx : false) : true
                                                ),
-                       TestCase::QUICK);
+                       Duration::QUICK);
         }
     }
 
@@ -293,7 +293,7 @@ DceManagerTestSuite::DceManagerTestSuite ()
                                                (tests[i].stackMask & FREEBSD_STACK) ?
                                                (isUctxFiber ? tests[i].skipUctx : false) : true
                                                ),
-                       TestCase::QUICK);
+                       Duration::QUICK);
         }
     }
 }

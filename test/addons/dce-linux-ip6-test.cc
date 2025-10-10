@@ -363,7 +363,7 @@ private:
 
 
 DceLinuxIp6TestSuite::DceLinuxIp6TestSuite ()
-  : TestSuite ("dce-linux-ip6", UNIT)
+  : TestSuite ("dce-linux-ip6", Type::UNIT)
 {
   typedef struct
   {
@@ -393,7 +393,7 @@ DceLinuxIp6TestSuite::DceLinuxIp6TestSuite ()
       AddTestCase (new DceLinuxIp6TestCase (std::string (tests[i].name),
                                             Seconds (tests[i].duration),
                                             tests[i].skip),
-                   TestCase::QUICK);
+                   Duration::QUICK);
     }
 }
 
