@@ -598,9 +598,9 @@ private:
 } g_netlinkTestSuite;
 
 NetlinkSocketTestSuite::NetlinkSocketTestSuite ()
-  : TestSuite ("dce-netlink-socket", UNIT)
+  : TestSuite ("dce-netlink-socket", Type::UNIT)
 {
-  AddTestCase (new NetlinkSocketTestCase (), TestCase::QUICK);
+  AddTestCase (new NetlinkSocketTestCase (), Duration::QUICK);
 }
 
 } // namespace ns3

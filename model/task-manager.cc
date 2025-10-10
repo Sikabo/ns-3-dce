@@ -92,7 +92,7 @@ TaskManager::GetTypeId (void)
                    "deallocate and switch among fibers.",
                    TypeId::ATTR_CONSTRUCT,
                    EnumValue (PTHREAD_FIBER_MANAGER),
-                   MakeEnumAccessor (&TaskManager::SetFiberManagerType),
+                   MakeEnumAccessor<FiberManagerType>  (&TaskManager::SetFiberManagerType),
                    MakeEnumChecker (PTHREAD_FIBER_MANAGER, "PthreadFiberManager",
                                     UCONTEXT_FIBER_MANAGER, "UcontextFiberManager"))
   ;

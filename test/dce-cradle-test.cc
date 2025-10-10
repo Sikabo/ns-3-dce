@@ -137,7 +137,7 @@ private:
 
 
 DceCradleTestSuite::DceCradleTestSuite ()
-  : TestSuite ("dce-cradle", UNIT)
+  : TestSuite ("dce-cradle", Type::UNIT)
 {
   typedef struct {
     const char *name;
@@ -172,8 +172,8 @@ DceCradleTestSuite::DceCradleTestSuite ()
                                           Seconds (tests[i].duration),
                                           tests[i].sockf,
                                           tests[i].isSkip
-                                          ), 
-                   TestCase::QUICK);
+                                          ),
+                   Duration::QUICK);
     }
 }
 
