@@ -249,7 +249,7 @@ UnixTimerFd::Settime (int flags,
 int
 UnixTimerFd::Gettime (struct itimerspec *cur_value) const
 {
-  if (!m_timer.IsRunning ())
+  if (!m_timer.IsPending ())
     {
       cur_value->it_value.tv_sec = 0;
       cur_value->it_value.tv_nsec = 0;

@@ -150,7 +150,7 @@ LinuxSocketImpl::LinuxSocketImpl ()
 
 LinuxSocketImpl::~LinuxSocketImpl ()
 {
-  if (m_poll.IsRunning ())
+  if (m_poll.IsPending ())
     {
       m_poll.Cancel ();
     }
