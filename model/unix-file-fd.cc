@@ -444,7 +444,7 @@ ssize_t
 UnixRandomFd::Read (void *buf, size_t count)
 {
   Ptr<DceNodeContext> nodeContext = DceNodeContext::GetNodeContext ();
-  NS_ASSERT (0 != nodeContext);
+  NS_ASSERT (nodeContext);
 
   return nodeContext->RandomRead (buf, count);
 }

@@ -134,7 +134,7 @@ void TaskManager::DoDispose (void)
   // Flush every FILEs in every processes.
   Ptr<DceManager> dceManager = this->GetObject<DceManager> ();
 
-  if (0 != dceManager)
+  if (dceManager)
     {
       std::map<uint16_t, Process *> procs = dceManager->GetProcs ();
       std::map<uint16_t, Process *>::iterator it;
@@ -200,7 +200,7 @@ TaskManager::SetDelayModel (Ptr<ProcessDelayModel> model)
 static void SwitchNotifEatSignal (void)
 {
   TaskManager *manager = TaskManager::Current ();
-  if (manager == 0)
+  if (!manager)
     {
       return;
     }

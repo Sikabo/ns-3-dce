@@ -43,7 +43,7 @@ LinuxSocketFdFactory::NotifyNewAggregate (void)
   Ptr<Node> node = this->GetObject<Node> ();
   Ptr<LoaderFactory> loaderFactory = this->GetObject<LoaderFactory> ();
   Ptr<TaskManager> taskManager = this->GetObject<TaskManager> ();
-  if (node != 0 && loaderFactory != 0 && taskManager != 0 && m_loader == 0)
+  if (node && loaderFactory && taskManager && m_loader == 0)
     {
       m_manager = taskManager;
       m_loader = loaderFactory->Create (0, 0, 0);
@@ -82,7 +82,7 @@ LinuxSocketFdFactory::SetTask (std::string path, std::string value)
 void
 LinuxSocketFdFactory::Set (std::string path, std::string value)
 {
-  if (m_manager == 0)
+  if (!m_manager)
     {
       m_earlySysfs.push_back (std::make_pair (path,value));
     }

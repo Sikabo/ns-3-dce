@@ -106,7 +106,7 @@ UnixStreamSocketFd::DoRecvmsg (struct msghdr *msg, int flags)
     {
       Address from;
       packet = m_socket->RecvFrom (totalAvailable, flags & ~MSG_DONTWAIT & ~MSG_PEEK, from);
-      if (packet == 0)
+      if (!packet)
         {
           current->err = ErrnoToSimuErrno ();
           return -1;
@@ -358,7 +358,7 @@ UnixStreamSocketFd::CanRecv (void) const
   bool ret = 0;
   uint32_t rx = 0;
 
-  if (0 == m_socket)
+  if (!m_socket)
     {
       ret = 0;
     }
@@ -398,7 +398,7 @@ UnixStreamSocketFd::CanRecv (void) const
 bool
 UnixStreamSocketFd::CanSend (void) const
 {
-  return m_socket != 0 && m_socket->GetTxAvailable () != 0;
+  return m_socket && m_socket->GetTxAvailable () != 0;
 }
 bool
 UnixStreamSocketFd::HangupReceived (void) const

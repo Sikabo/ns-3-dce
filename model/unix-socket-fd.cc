@@ -1070,7 +1070,7 @@ UnixSocketFd::AddPeekedData (Ptr<Packet> p)
 bool
 UnixSocketFd::isPeekedData (void)
 {
-  return ((0 != m_peekedData) && (m_peekedData->GetSize () > 0));
+  return ((m_peekedData) && (m_peekedData->GetSize () > 0));
 }
 Address
 UnixSocketFd::GetPeekedFrom (void)

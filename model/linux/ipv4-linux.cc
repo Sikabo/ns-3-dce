@@ -279,7 +279,7 @@ Ipv4Linux::AddAddress (uint32_t i, Ipv4InterfaceAddress address)
   NS_LOG_FUNCTION (this << i << address);
   Ptr<Ipv4Interface> interface = GetInterface (i);
   bool retVal = interface->AddAddress (address);
-  if (m_routingProtocol != 0)
+  if (m_routingProtocol)
     {
       m_routingProtocol->NotifyAddAddress (i, address);
     }
@@ -321,7 +321,7 @@ Ipv4Linux::RemoveAddress (uint32_t i, uint32_t addressIndex)
   Ipv4InterfaceAddress address = interface->RemoveAddress (addressIndex);
   if (address != Ipv4InterfaceAddress ())
     {
-      if (m_routingProtocol != 0)
+      if (m_routingProtocol)
         {
           m_routingProtocol->NotifyRemoveAddress (i, address);
         }
@@ -344,7 +344,7 @@ Ipv4Linux::RemoveAddress (uint32_t i, Ipv4Address address)
   Ipv4InterfaceAddress ifAddr = interface->RemoveAddress (address);
   if (ifAddr != Ipv4InterfaceAddress ())
     {
-      if (m_routingProtocol != 0)
+      if (m_routingProtocol)
         {
           m_routingProtocol->NotifyRemoveAddress (i, ifAddr);
         }
@@ -368,7 +368,7 @@ Ipv4Linux::SelectSourceAddress (Ptr<const NetDevice> device,
   Ipv4InterfaceAddress iaddr;
   bool found = false;
 
-  if (device != 0)
+  if (device)
     {
       int32_t i = GetInterfaceForDevice (device);
       NS_ASSERT_MSG (i >= 0, "No device found on node");
@@ -457,7 +457,7 @@ Ipv4Linux::SetUp (uint32_t i)
   Ptr<Ipv4Interface> interface = GetInterface (i);
   interface->SetUp ();
 
-  if (m_routingProtocol != 0)
+  if (m_routingProtocol)
     {
       m_routingProtocol->NotifyInterfaceUp (i);
     }
@@ -470,7 +470,7 @@ Ipv4Linux::SetDown (uint32_t ifaceIndex)
   Ptr<Ipv4Interface> interface = GetInterface (ifaceIndex);
   interface->SetDown ();
 
-  if (m_routingProtocol != 0)
+  if (m_routingProtocol)
     {
       m_routingProtocol->NotifyInterfaceDown (ifaceIndex);
     }

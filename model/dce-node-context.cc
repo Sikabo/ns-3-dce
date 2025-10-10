@@ -79,7 +79,7 @@ DceNodeContext::UName (struct utsname *buf)
     {
       uint32_t nodeId = UtilsGetNodeId ();
       Ptr<Node> node = NodeList::GetNode (nodeId);
-      NS_ASSERT (node != 0);
+      NS_ASSERT (node);
       std::string nodeName = Names::FindName (node);
       std::ostringstream oss;
 
