@@ -212,12 +212,12 @@ void unlink_notify (std::string fullpath)
 
   Ptr<SocketFdFactory> factory = Current ()->process->manager->GetObject<LocalSocketFdFactory> ();
 
-  if (0 != factory)
+  if (factory)
     {
       factory->UnlinkNotify (fullpath);
     }
   factory = Current ()->process->manager->GetObject<SocketFdFactory> ();
-  if (0 != factory)
+  if (factory)
     {
       factory->UnlinkNotify (fullpath);
     }

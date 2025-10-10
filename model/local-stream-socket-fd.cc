@@ -103,7 +103,7 @@ LocalStreamSocketFd::Close (void)
     case LISTENING:
     case ACCEPTING:
       {
-        NS_ASSERT (0 != m_factory);
+        NS_ASSERT (m_factory);
         m_factory->UnRegisterBinder (m_bindPath);
         m_bindPath = "";
         ClearAll (ACCEPTING == m_state);
@@ -785,7 +785,7 @@ LocalStreamSocketFd::Connect (const struct sockaddr *my_addr, socklen_t addrlen)
   NS_ASSERT (current != 0);
 
   // first seek bind one
-  if (0 == m_factory)
+  if (!m_factory)
     {
       Current ()->err = EINVAL;
       return -1;

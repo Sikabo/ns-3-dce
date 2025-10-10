@@ -16,7 +16,7 @@ NS_LOG_COMPONENT_DEFINE ("DceMisc");
 int dce_uname (struct utsname *buf)
 {
   Ptr<DceNodeContext> nodeContext = DceNodeContext::GetNodeContext ();
-  NS_ASSERT (0 != nodeContext);
+  NS_ASSERT (nodeContext);
 
   return nodeContext->UName (buf);
 }

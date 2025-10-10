@@ -77,7 +77,7 @@ private:
 template<class T>
 Ptr<T> Ipv4DceRouting::GetRouting (Ptr<Ipv4RoutingProtocol> ipv4rp, T* type)
 {
-  if (ipv4rp == 0)
+  if (!ipv4rp)
     {
       return 0;
     }
@@ -93,7 +93,7 @@ Ptr<T> Ipv4DceRouting::GetRouting (Ptr<Ipv4RoutingProtocol> ipv4rp, T* type)
         {
           int16_t priority;
           Ptr<T> ret = GetRouting (lrp->GetRoutingProtocol (i, priority), type);
-          if (ret != 0)
+          if (ret)
             {
               return ret;
             }

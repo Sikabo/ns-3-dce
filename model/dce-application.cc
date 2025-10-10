@@ -70,7 +70,7 @@ DceApplication::StartApplication (void)
 
   Ptr<Node> node = GetNode ();
   Ptr<DceManager> manager = node->GetObject<DceManager> ();
-  if (manager == 0)
+  if (!manager)
     {
       NS_FATAL_ERROR ("You forgot to aggregate a DceManager to node=" << node->GetId ());
     }

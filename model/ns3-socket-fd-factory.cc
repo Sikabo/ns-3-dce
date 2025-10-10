@@ -58,7 +58,7 @@ void
 Ns3SocketFdFactory::NotifyNewAggregate (void)
 {
   Ptr<Node> node = this->GetObject<Node> ();
-  if (m_netlink == 0)
+  if (!m_netlink)
     {
       m_netlink = CreateObject<NetlinkSocketFactory> ();
       node->AggregateObject (m_netlink);

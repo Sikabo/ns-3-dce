@@ -263,7 +263,7 @@ NetlinkSocket::DoBind (const NetlinkSocketAddress &address)
   Thread *current = Current ();
   if (current != 0) // will be 0 when opening socket from NS3 (e.g., Ipv4DceRouting)
     {
-      NS_ASSERT (m_node != 0);
+      NS_ASSERT (m_node);
       Ptr<NetlinkSocketFactory> nsf = m_node->GetObject<NetlinkSocketFactory> ();
 
       if (m_Pid == 0)
@@ -285,12 +285,12 @@ NetlinkSocket::DoBind (const NetlinkSocketAddress &address)
     }
 
   Ptr<Ipv4> ipv4 = m_node->GetObject<Ipv4> ();
-  NS_ASSERT_MSG (ipv4 != 0, "Netlink Socket requires IPv4 stack to be installed on the node");
+  NS_ASSERT_MSG (ipv4, "Netlink Socket requires IPv4 stack to be installed on the node");
 
   // We only care about staticRouting for netlink support
   m_ipv4Routing = Ipv4DceRouting::GetRouting (ipv4->GetRoutingProtocol (),
                                               (Ipv4DceRouting*)0);
-  NS_ASSERT_MSG (m_ipv4Routing != 0,
+  NS_ASSERT_MSG (m_ipv4Routing,
                  "Netlink Socket requires Ipv4DceRouting to be installed on the node");
 
   return 0;
@@ -342,7 +342,7 @@ NetlinkSocket::Close (void)
   ShutdownRecv ();
 
   // a little bit complicated, but this will allow us to keep track of every open netlink socket
-  if (m_node != 0)
+  if (m_node)
     {
       Ptr<NetlinkSocketFactory> nsf = m_node->GetObject<NetlinkSocketFactory> ();
 
@@ -968,12 +968,12 @@ NetlinkSocket::BuildRouteDumpMessages (uint32_t seq)
   NS_LOG_FUNCTION (this);
   MultipartNetlinkMessage nlmsg_dump;
 
-  if (0 == m_ipv4Routing)
+  if (!m_ipv4Routing)
     {
       return nlmsg_dump;
     }
 
-  NS_ASSERT_MSG (m_ipv4Routing != 0, "Should not happen");
+  NS_ASSERT_MSG (m_ipv4Routing, "Should not happen");
 
   // We only care about staticRouting for netlink support
   for (uint32_t i = 0; i < m_ipv4Routing->GetNRoutes (); i++)
@@ -1620,7 +1620,7 @@ NetlinkSocket::DoRouteMessage (const NetlinkMessage &nlmsg, uint16_t type, uint8
 int32_t
 NetlinkSocket::NotifyIfLinkMessage (uint32_t interface_num)
 {
-  if (m_ipv4Routing == 0)
+  if (m_ipv4Routing == nullptr)
     {
       NS_LOG_ERROR ("No Ipv4 routing set");
       return -1;                     //should be some nicer error code

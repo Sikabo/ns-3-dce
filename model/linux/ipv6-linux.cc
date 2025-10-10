@@ -217,7 +217,7 @@ Ipv6Linux::AddAddress (uint32_t i, Ipv6InterfaceAddress address, bool addOnLinkR
   Ptr<Ipv6Interface> interface = GetInterface (i);
   address.SetOnLink (addOnLinkRoute);
   bool retVal = interface->AddAddress (address);
-  if (m_routingProtocol != 0)
+  if (m_routingProtocol)
     {
       m_routingProtocol->NotifyAddAddress (i, address);
     }
@@ -259,7 +259,7 @@ Ipv6Linux::RemoveAddress (uint32_t i, uint32_t addressIndex)
   Ipv6InterfaceAddress address = interface->RemoveAddress (addressIndex);
   if (address != Ipv6InterfaceAddress ())
     {
-      if (m_routingProtocol != 0)
+      if (m_routingProtocol)
         {
           m_routingProtocol->NotifyRemoveAddress (i, address);
         }
@@ -282,7 +282,7 @@ Ipv6Linux::RemoveAddress (uint32_t i, Ipv6Address address)
   Ipv6InterfaceAddress ifAddr = interface->RemoveAddress (address);
   if (ifAddr != Ipv6InterfaceAddress ())
   {
-    if (m_routingProtocol != 0)
+    if (m_routingProtocol)
     {
       m_routingProtocol->NotifyRemoveAddress (i, ifAddr);
     }
@@ -334,7 +334,7 @@ Ipv6Linux::SetUp (uint32_t i)
   Ptr<Ipv6Interface> interface = GetInterface (i);
   interface->SetUp ();
 
-  if (m_routingProtocol != 0)
+  if (m_routingProtocol)
     {
       m_routingProtocol->NotifyInterfaceUp (i);
     }
@@ -347,7 +347,7 @@ Ipv6Linux::SetDown (uint32_t ifaceIndex)
   Ptr<Ipv6Interface> interface = GetInterface (ifaceIndex);
   interface->SetDown ();
 
-  if (m_routingProtocol != 0)
+  if (m_routingProtocol)
     {
       m_routingProtocol->NotifyInterfaceDown (ifaceIndex);
     }

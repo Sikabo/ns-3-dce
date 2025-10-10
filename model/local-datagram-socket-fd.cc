@@ -482,7 +482,7 @@ LocalDatagramSocketFd::Connect (const struct sockaddr *my_addr, socklen_t addrle
   NS_ASSERT (current != 0);
 
   // first seek bind one
-  if (0 == m_factory)
+  if (!m_factory)
     {
       Current ()->err = EINVAL;
       return -1;

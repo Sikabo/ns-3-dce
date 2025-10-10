@@ -59,12 +59,12 @@ UnixDatagramSocketFd::UnixDatagramSocketFd (Ptr<Socket> sock)
 bool
 UnixDatagramSocketFd::CanRecv (void) const
 {
-  return m_socket != 0 && m_socket->GetRxAvailable () != 0;
+  return m_socket && m_socket->GetRxAvailable () != 0;
 }
 bool
 UnixDatagramSocketFd::CanSend (void) const
 {
-  return m_socket != 0 && m_socket->GetTxAvailable () != 0;
+  return m_socket && m_socket->GetTxAvailable () != 0;
 }
 bool
 UnixDatagramSocketFd::HangupReceived (void) const
@@ -186,7 +186,7 @@ UnixDatagramSocketFd::DoRecvmsg (struct msghdr *msg, int flags)
   Ptr<Packet> packet = m_socket->RecvFrom (count, flags, from);
   uint32_t l = 0;
 
-  if (packet == 0)
+  if (!packet)
     {
       current->err = ErrnoToSimuErrno ();
       return -1;

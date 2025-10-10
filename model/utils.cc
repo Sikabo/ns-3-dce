@@ -126,7 +126,7 @@ Thread * Current (void)
     }
 
   TaskManager *manager = TaskManager::Current ();
-  if (manager == 0)
+  if (!manager)
     {
       return 0;
     }
