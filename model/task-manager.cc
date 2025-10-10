@@ -310,7 +310,7 @@ TaskManager::Wakeup (Task *task)
     }
   task->m_state = Task::ACTIVE;
   m_scheduler->Enqueue (task);
-  if ((0 == m_current) && (!m_nextSchedule.IsRunning ()))
+  if ((0 == m_current) && (!m_nextSchedule.IsPending ()))
     {
       m_nextSchedule = Simulator::ScheduleNow (&TaskManager::Schedule, this);
     }
