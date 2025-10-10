@@ -41,6 +41,9 @@ LinuxIpv4RawSocketFactoryImpl::CreateSocket (void)
   socket->SetAttribute ("Protocol", UintegerValue (25));
   socket->CreateSocket ();
   return socket;
+#else
+  NS_LOG_WARN ("LinuxIpv4RawSocketFactoryImpl::CreateSocket(): require KERNEL_STACK");
+  return nullptr;
 #endif
 }
 
