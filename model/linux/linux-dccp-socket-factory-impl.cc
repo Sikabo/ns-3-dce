@@ -41,6 +41,9 @@ LinuxDccpSocketFactoryImpl::CreateSocket (void)
   socket->SetAttribute ("Protocol", UintegerValue (IPPROTO_DCCP));
   socket->CreateSocket ();
   return socket;
+#else
+  NS_LOG_WARN ("LinuxDccpSocketFactoryImpl::CreateSocket(): require KERNEL_STACK");
+  return nullptr;
 #endif
 }
 

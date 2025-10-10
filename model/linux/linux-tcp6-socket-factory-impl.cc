@@ -41,6 +41,9 @@ LinuxTcp6SocketFactoryImpl::CreateSocket (void)
   socket->SetAttribute ("Protocol", UintegerValue (IPPROTO_TCP));
   socket->CreateSocket ();
   return socket;
+#else
+  NS_LOG_WARN ("LinuxTcp6SocketFactoryImpl::CreateSocket(): require KERNEL_STACK");
+  return nullptr;
 #endif
 }
 

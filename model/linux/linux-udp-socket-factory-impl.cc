@@ -41,6 +41,9 @@ LinuxUdpSocketFactoryImpl::CreateSocket (void)
   socket->SetAttribute ("Protocol", UintegerValue (IPPROTO_UDP));
   socket->CreateSocket ();
   return socket;
+#else
+  NS_LOG_WARN ("LinuxUdpSocketFactoryImpl::CreateSocket(): require KERNEL_STACK");
+  return nullptr;
 #endif
 }
 
